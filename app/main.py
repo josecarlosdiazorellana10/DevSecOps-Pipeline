@@ -182,3 +182,11 @@ def hash_password(value: str = Form(...)):
       <a href="/hash">Hash another</a>
     </body></html>
     """
+
+
+
+# ── VULN nueva (demo Quality Gate): Code Injection con eval ──────────────────
+@app.get("/calc", response_class=HTMLResponse)
+def calc(expr: str = ""):
+    result = eval(expr)
+    return f"<html><body><h1>Resultado: {result}</h1></body></html>"
